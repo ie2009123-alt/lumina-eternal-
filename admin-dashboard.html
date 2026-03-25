@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+        }
+        header {
+            background: #1e1e1e;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background: #444;
+        }
+        .container {
+            padding: 20px;
+        }
+        .card {
+            background: #1e1e1e;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #00acc1;
+        }
+        .analytics, .user-management, .revenue-tracking, .verifications {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .card i {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <a href="#analytics"><i class="fas fa-chart-line"></i> Analytics</a>
+            <a href="#users"><i class="fas fa-users"></i> User Management</a>
+            <a href="#revenues"><i class="fas fa-dollar-sign"></i> Revenue Tracking</a>
+            <a href="#verifications"><i class="fas fa-check-circle"></i> Verifications</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="analytics">
+            <h2 id="analytics">Analytics</h2>
+            <div class="card">
+                <h3>Website Traffic</h3>
+                <p>Display traffic stats, user sessions, and top locations.</p>
+                <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="card">
+                <h3>User Engagement</h3>
+                <p>Show average session duration and engagement rates.</p>
+                <i class="fas fa-chart-bar"></i>
+            </div>
+        </section>
+        <section class="user-management">
+            <h2 id="users">User Management</h2>
+            <div class="card">
+                <h3>Active Users</h3>
+                <p>Display current active users and their details.</p>
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="card">
+                <h3>User Roles</h3>
+                <p>Manage user roles and permissions.</p>
+                <i class="fas fa-user-shield"></i>
+            </div>
+        </section>
+        <section class="revenue-tracking">
+            <h2 id="revenues">Revenue Tracking</h2>
+            <div class="card">
+                <h3>Total Revenue</h3>
+                <p>Show total revenue generated with charts.</p>
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="card">
+                <h3>Revenue by Source</h3>
+                <p>Display revenue sources and their contributions.</p>
+                <i class="fas fa-money-bill-wave"></i>
+            </div>
+        </section>
+        <section class="verifications">
+            <h2 id="verifications">Professional Verification</h2>
+            <div class="card">
+                <h3>Pending Verifications</h3>
+                <p>Show list of professionals awaiting verification.</p>
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="card">
+                <h3>Verified Professionals</h3>
+                <p>Display list of all verified professionals.</p>
+                <i class="fas fa-check"></i>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
