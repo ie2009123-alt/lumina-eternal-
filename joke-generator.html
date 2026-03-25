@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joke Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        button { margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Random Joke Generator</h1>
+    <div id="joke"></div>
+    <button id="new-joke">Get New Joke</button>
+    <button id="favorite">Add to Favorites</button>
+    <button id="copy">Copy Joke</button>
+    <button id="share">Share</button>
+    <h2>Favorites</h2>
+    <ul id="favorites-list"></ul>
+
+    <script>
+        const jokeDiv = document.getElementById('joke');
+        const newJokeButton = document.getElementById('new-joke');
+        const favoriteButton = document.getElementById('favorite');
+        const copyButton = document.getElementById('copy');
+        const shareButton = document.getElementById('share');
+        const favoritesList = document.getElementById('favorites-list');
+
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        updateFavoritesList();
+
+        async function fetchJoke() {
+            const response = await fetch('https://v2.jokeapi.dev/joke/Any');
+            const data = await response.json();
+            jokeDiv.innerHTML = data.type === 'single' ? data.joke : `${data.setup} <br> ${data.delivery}`;
+        }
+
+        function addFavorite(joke) {
+            if (!favorites.includes(joke)) {
+                favorites.push(joke);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                updateFavoritesList();
+            }
+        }
+
+        function updateFavoritesList() {
+            favoritesList.innerHTML = '';
+            favorites.forEach(favJoke => {
+                const li = document.createElement('li');
+                li.textContent = favJoke;
+                favoritesList.appendChild(li);
+            });
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Joke copied to clipboard!');
+            });
+        }
+
+        function shareJoke(text) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Check out this joke!',
+                    text: text,
+                }).then(() => console.log('Share successful'))
+                  .catch((error) => console.error('Error sharing:', error));
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+
+        newJokeButton.addEventListener('click', () => {
+            fetchJoke();
+        });
+
+        favoriteButton.addEventListener('click', () => {
+            const currentJoke = jokeDiv.textContent;
+            addFavorite(currentJoke);
+        });
+
+        copyButton.addEventListener('click', () => {
+            copyToClipboard(jokeDiv.textContent);
+        });
+
+        shareButton.addEventListener('click', () => {
+            shareJoke(jokeDiv.textContent);
+        });
+
+        // Fetch the first joke when the page loads
+        fetchJoke();
+    </script>
+</body>
+</html>
